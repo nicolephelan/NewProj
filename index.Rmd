@@ -9,4 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Here is the link to my first webpage : [Homework 02](NewPage.html)
+This web page is where I will upload all of my homework assignments and build my portfolio for BIOL 6100.
+
+[Homework 02](NewPage.html)
+
+[Homework 03]
