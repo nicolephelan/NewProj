@@ -182,4 +182,4 @@ FIND: (\w{6})\w*,\w*,(\d*.\d),(\d*)
 REPLACE: \1, \3, \2
 ```
 
-**Explanation**: I edited my FIND from question 5 to only capture the first 6 letters of the first word. I took away the capture on my second word and I added a capture to the first number in the data set. Keeping only my captured words/numbers, I reordered them and added commas.
+**Explanation**: I edited my FIND from question 5 to only capture the first 6 letters of the first word. I took away the capture on my second word and I added a capture to the first number in the data set. Keeping only my captured words/numbers, I reordered them giand added commas.
