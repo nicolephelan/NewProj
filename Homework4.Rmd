@@ -1,0 +1,127 @@
+---
+title: "Homework4"
+author: "Nicole Phelan"
+date: "2024-02-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 1
+
+```{r}
+
+x <- 1.1
+a <- 2.2
+b <- 3.3
+
+# Question 1A:
+
+z <- x^(a^b)
+print(z)
+
+# Question 1B:
+
+z <- (x^a)^b
+print(z)
+
+# Question 1C:
+
+z <- (3*(x^3))+(2*(x^2))+1
+print(z)
+
+```
+
+# Question 2
+
+```{r}
+
+# Question 2A:
+
+my_vector <- rep(NA,15)
+vec <- c((seq(from=1,to=8,by=1)),(rev(seq(from=1,to=7,by=1))))
+my_vector[1:15] <- vec
+print(my_vector)
+
+# Question 2B
+
+new_vector <- seq(from=1,to=5,by=1)
+new_vector_revised <- rep(x=new_vector,times=new_vector)
+print(new_vector_revised)
+
+#Question 2C
+
+
+vec1 <- seq(from=1,to=5,by=1)
+vec2 <- rev(seq(from=1,to=5,by=1))
+new_vector <- rep(x=vec2,times=vec1)
+print(new_vector)
+
+```
+
+# Question 3
+
+```{r}
+
+xy <- runif(2)
+print(xy)
+r <- sqrt(((xy[1])^2)+((xy[2])^2))
+theta <- asin(xy[2]/r)
+coor <- c(r,theta)
+print(coor)
+
+```
+
+# Question 4
+
+```{r}
+
+queue <- c("sheep", "fox", "owl", "ant")
+
+# Question 4A
+
+queue <- c(queue,"serpent")
+print(queue)
+
+# Question 4B
+
+queue <- queue[2:5]
+print(queue)
+
+# Question 4C
+
+queue <- c("donkey",queue)
+print(queue)
+
+# Question 4D
+
+queue <- queue[1:4]
+print(queue)
+
+# Question 4E
+
+queue <- c(queue[1:2],queue[4])
+print(queue)
+
+# Question 4F
+
+queue <- c(queue[1:2],"aphid",queue[3])
+print(queue)
+
+# Question 4G
+
+print(which(queue=="aphid"))
+
+```
+
+# Question 5
+
+```{r}
+
+my_vec <- seq(1,100)
+new_vec <-  my_vec[!(my_vec %% 2==0 | my_vec %% 3==0 | my_vec %% 7==0)]
+print(new_vec)
+
+```
