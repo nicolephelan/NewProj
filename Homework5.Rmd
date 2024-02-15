@@ -1,0 +1,242 @@
+---
+title: "Homework5"
+author: "Nicole Phelan"
+date: "2024-02-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 1
+
+```{r}
+
+n_dims <- sample(3:10,size=1)
+print(n_dims)
+
+```
+
+#### Question 1 Bullet Point 1
+
+```{r}
+
+con_int <- 1:(n_dims^2)
+print(con_int)
+
+```
+
+#### Question 1 Bullet Point 2
+
+```{r}
+
+reshuffle <- sample(con_int)
+print(reshuffle)
+
+```
+
+#### Question 1 Bullet Point 3
+
+```{r}
+
+sq_matrix <- matrix(reshuffle,nrow=n_dims)
+
+```
+
+#### Question 1 Bullet Point 4
+
+```{r}
+
+print(sq_matrix)
+
+```
+
+#### Question 1 Bullet Point 5
+
+```{r}
+
+transposed <- t(sq_matrix)
+
+```
+
+#### Question 1 Bullet Point 6
+
+```{r}
+
+print(transposed)
+
+```
+
+Transposing a matrix causes the rows to become columns and the columns to become rows.
+
+#### Question 1 Bullet Point 7
+
+```{r}
+
+# Sum of the first row
+first_row_sum <- sum(transposed[1,])
+print(first_row_sum)
+
+# Sum of the last row
+last_row_sum <- sum(transposed[n_dims,])
+print(last_row_sum)
+
+# Mean of the first row
+first_row_mean <- mean(transposed[1,])
+print(first_row_mean)
+
+# Mean of the last row
+last_row_mean <- mean(transposed[n_dims,])
+print(last_row_mean)
+
+```
+
+#### Question 1 Bullet Point 8
+
+```{r}
+
+eigen <- eigen(transposed)
+print(eigen)
+
+```
+
+#### Question 1 Bullet Point 9
+
+\$values refers to eigen values and $vectors refers to eigen vectors. The eigen vector is a type of vector that when multiplied by the eigen value, it results in a vector in the same or opposite direction as the original vector.
+
+#### Question 1 Bullet Point 10
+
+```{r}
+
+typeof(eigen)
+
+```
+
+# Question 2
+
+#### Question 2 Bullet Point 1
+
+```{r}
+
+my_matrix <- matrix(runif(16),nrow=4)
+print(my_matrix)
+
+```
+
+#### Question 2 Bullet Point 2
+
+```{r}
+
+my_logical <- (runif(100)<0.5)
+print(my_logical)
+
+```
+
+#### Question 2 Bullet Point 3
+
+```{r}
+
+my_letters <- sample(letters)
+print(my_letters)
+
+```
+
+#### Question 2 Bullet Point 4
+
+```{r}
+
+newList <- list(my_matrix[2,2],my_logical[2],my_letters[2])
+print(newList)
+
+```
+
+#### Question 2 Bullet Point 5
+
+```{r}
+
+typeof(newList[[1]]) # Determines data type of first list item
+typeof(newList[[2]]) # Determines data type of second list item
+typeof(newList[[3]]) # Determines data type of last list item
+typeof(newList) # Determines data type of newList
+
+```
+
+#### Question 2 Bullet Point 6
+
+```{r}
+
+single_vec <- c(my_matrix[2,2],my_logical[2],my_letters[2])
+print(single_vec)
+
+```
+
+#### Question 2 Bullet Point 7
+
+```{r}
+
+typeof(single_vec)
+
+```
+
+Everything in the list has been coerced into a character string.
+
+# Question 3
+
+#### Question 3 Bullet Point 1
+
+```{r}
+
+my_unis <- runif(26,0,10)
+print(my_unis)
+
+```
+
+#### Question 3 Bullet Point 2
+
+```{r}
+
+my_letters <- sample(LETTERS)
+print(my_letters)
+
+```
+
+#### Question 3 Bullet Point 3
+
+```{r}
+
+df <- data.frame(my_unis,my_letters)
+print(df)
+
+df[sample(nrow(df),4),1] <- NA
+print(df)
+
+```
+
+
+#### Question 3 Bullet Point 4
+
+```{r}
+
+print(which(df[,1]==NA))
+
+```
+
+#### Question 3 Bullet Point 5
+
+```{r}
+
+library(dplyr)
+alphabetized <- arrange(df, my_letters)
+print(alphabetized)
+
+```
+
+#### Question 3 Bullet Point 6
+
+```{r}
+
+mean_first_col <- mean(alphabetized[,1],na.rm=TRUE)
+print(mean_first_col)
+
+```
