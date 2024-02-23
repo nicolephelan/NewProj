@@ -1,0 +1,110 @@
+---
+title: "Homework6"
+author: "Nicole Phelan"
+date: "2024-02-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Bombus Bumblebee Seasonal Variation
+
+#### Finding the Best Fit Distribution
+#### and Simulating a New Data Set
+
+```{r}
+library(ggplot2) 
+library(MASS)
+library(tidyverse)
+
+# Importing the data set
+z <- read.table(file="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",
+                header=TRUE,
+                sep=",")
+
+# Data cleaning NA values
+z <- na.omit(z)
+# Naming the variable of interest
+z$myvar <- z$pathogen_load
+# Converting the data to log function
+z <-z%>%filter(pathogen_load>0)%>%
+  mutate(myvar=log(pathogen_load))
+
+str(z$myvar)
+
+# Summarizing stats of the data of interest
+summary(z$myvar)
+# How many 0s are in the original data (not the log version)
+sum(z$pathogen_load>0)
+
+# Plotting the histogram of the variable of interest
+p1 <- ggplot(data=z, aes(x=myvar, y=after_stat(density))) +
+  geom_histogram(color="grey60",fill="cornsilk",linewidth=0.2) 
+print(p1)
+
+p1 <- p1 + geom_density(linetype="dotted",linewidth=0.75)
+print(p1)
+
+normPars <- fitdistr(z$myvar,"normal")
+print(normPars)
+str(normPars)
+normPars$estimate["mean"] # note structure of getting a named attribute
+
+meanML <- normPars$estimate["mean"]
+sdML <- normPars$estimate["sd"]
+
+xval <- seq(0,max(z$myvar),len=length(z$myvar))
+
+stat <- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour="red", n = length(z$myvar), args = list(mean = meanML, sd = sdML))
+p1 + stat
+
+expoPars <- fitdistr(z$myvar,"exponential")
+rateML <- expoPars$estimate["rate"]
+
+stat2 <- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour="blue", n = length(z$myvar), args = list(rate=rateML))
+p1 + stat + stat2
+
+stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour="darkgreen", n = length(z$myvar), args = list(min=min(z$myvar), max=max(z$myvar)))
+p1 + stat + stat2 + stat3
+
+gammaPars <- fitdistr(z$myvar,"gamma")
+shapeML <- gammaPars$estimate["shape"]
+rateML <- gammaPars$estimate["rate"]
+
+stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour="brown", n = length(z$myvar), args = list(shape=shapeML, rate=rateML))
+p1 + stat + stat2 + stat3 + stat4
+
+pSpecial <- ggplot(data=z, aes(x=myvar/(max(myvar + 0.1)), y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) + 
+  xlim(c(0,1)) +
+  geom_density(size=0.75,linetype="dotted")
+
+betaPars <- fitdistr(x=z$myvar/max(z$myvar + 0.1),start=list(shape1=1,shape2=2),"beta")
+shape1ML <- betaPars$estimate["shape1"]
+shape2ML <- betaPars$estimate["shape2"]
+
+statSpecial <- stat_function(aes(x = xval, y = ..y..), fun = dbeta, colour="orchid", n = length(z$myvar), args = list(shape1=shape1ML,shape2=shape2ML))
+pSpecial + statSpecial
+
+# Simulating a New Data Set
+
+# Creating a Data Frame with Random Gamma Values
+simData <- rgamma(n=length(z$myvar),shape=shapeML,rate=rateML)
+id <- 1:length(z$myvar)
+sim_frame <- data.frame(simData,id)
+
+str(simData)
+summary(simData)
+
+# Plotting the Simulated Data with the Gamma Function 
+p2 <- ggplot(data=sim_frame, aes(x=simData, y=after_stat(density))) +
+  geom_histogram(color="grey60",fill="cornsilk",linewidth=0.2) 
+p2 + stat4
+
+# Plotting the Original Data with the Probability Density Curve
+p1 + stat4
+```
+
+The gamma probability density curve does a pretty good job of modelling the original data, but it is not perfect. The mean value at which the distribution is centered is nearly consistent between the model and the real data (~13). However, the real data has a sharp decline in density at around 10, which might be a problem for representing real ecological constraints within the model.
