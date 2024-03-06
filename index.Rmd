@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This web page is where I will upload all of my homework assignments and build my portfolio for BIOL 6100.
+This web page is where you can find all of my homework assignments (aka my portfolio) for BIOL 6100.
 
 [Homework 02](NewPage.html)
 

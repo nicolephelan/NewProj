@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This was my initial run with the code given for the random data set
 
+My comments for the code are included in the Homework 06 Page
+
 ```{r,EVAL=FALSE}
 library(ggplot2) # for graphics
 library(MASS) # for maximum likelihood estimation
@@ -22,7 +24,7 @@ library(MASS) # for maximum likelihood estimation
 z <- rnorm(n=3000,mean=0.2)
 z <- data.frame(1:3000,z)
 names(z) <- list("ID","myVar")
-z <- z[z$myVar>0,]
+z <- z[z$myVar>0,] # eliminates 0 values
 str(z)
 summary(z$myVar)
 

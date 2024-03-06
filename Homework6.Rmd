@@ -14,11 +14,14 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Finding the Best Fit Distribution
 #### and Simulating a New Data Set
 
-```{r}
+```{r, EVAL=FALSE}
 library(ggplot2) 
 library(MASS)
 library(tidyverse)
+```
 
+#### Creating the Data Set
+```{r}
 # Importing the data set
 z <- read.table(file="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",
                 header=TRUE,
@@ -28,68 +31,91 @@ z <- read.table(file="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",
 z <- na.omit(z)
 # Naming the variable of interest
 z$myvar <- z$pathogen_load
-# Converting the data to log function
+# Converting the data to log function and eliminating excessive 0 values (that are skewing the data)
 z <-z%>%filter(pathogen_load>0)%>%
   mutate(myvar=log(pathogen_load))
 
+# Structure of the pathogen load variable
 str(z$myvar)
 
 # Summarizing stats of the data of interest
 summary(z$myvar)
 # How many 0s are in the original data (not the log version)
+# This is what I removed through data cleaning
 sum(z$pathogen_load>0)
+```
 
-# Plotting the histogram of the variable of interest
+#### Trying Out Different Distribution Fits
+
+```{r}
+# Plotting the histogram of the pathogen load
 p1 <- ggplot(data=z, aes(x=myvar, y=after_stat(density))) +
   geom_histogram(color="grey60",fill="cornsilk",linewidth=0.2) 
 print(p1)
-
+# Adds geom density to smooth out the shape of the raw data
 p1 <- p1 + geom_density(linetype="dotted",linewidth=0.75)
 print(p1)
-
+# Normal distribution fitted to the pathogen load data
 normPars <- fitdistr(z$myvar,"normal")
-print(normPars)
+# Shows the mean and sd being used for the fitted distribution
+print(normPars) 
+# Structure of normal distribution best fit
 str(normPars)
+# Estimated mean (truncated from initial print function)
 normPars$estimate["mean"] # note structure of getting a named attribute
 
+# Creating sd and mean variables for normal distribution function
 meanML <- normPars$estimate["mean"]
 sdML <- normPars$estimate["sd"]
 
+# Generating possible data from the pathogen load data
 xval <- seq(0,max(z$myvar),len=length(z$myvar))
 
+# Creating and plotting the normal distribution function over the histogram of the pathogen load data
 stat <- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour="red", n = length(z$myvar), args = list(mean = meanML, sd = sdML))
 p1 + stat
 
+# Creating the variables for exponential probability density curve
 expoPars <- fitdistr(z$myvar,"exponential")
 rateML <- expoPars$estimate["rate"]
-
+# Creating and plotting the exponential probability distribution function over the histogram of the pathogen load data and normal distribution function
 stat2 <- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour="blue", n = length(z$myvar), args = list(rate=rateML))
 p1 + stat + stat2
 
+# Adding the uniform density curve to the mix
 stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour="darkgreen", n = length(z$myvar), args = list(min=min(z$myvar), max=max(z$myvar)))
 p1 + stat + stat2 + stat3
 
+# Finally the gamma density function
+# Creating the variables first
 gammaPars <- fitdistr(z$myvar,"gamma")
 shapeML <- gammaPars$estimate["shape"]
 rateML <- gammaPars$estimate["rate"]
-
+# Plotting the gamma function with everything else
 stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour="brown", n = length(z$myvar), args = list(shape=shapeML, rate=rateML))
 p1 + stat + stat2 + stat3 + stat4
 
+# A New plot with the beta probability density
+# Cannot be added to original graph because pathogen load data needs to be re-scaled
+# Code for the new histogram
 pSpecial <- ggplot(data=z, aes(x=myvar/(max(myvar + 0.1)), y=..density..)) +
   geom_histogram(color="grey60",fill="cornsilk",size=0.2) + 
-  xlim(c(0,1)) +
-  geom_density(size=0.75,linetype="dotted")
+  xlim(c(0,1)) + # the re-scaling step
+  geom_density(linewidth=0.75,linetype="dotted")
 
+#Now for the beta function
 betaPars <- fitdistr(x=z$myvar/max(z$myvar + 0.1),start=list(shape1=1,shape2=2),"beta")
+# Creating all our variables
 shape1ML <- betaPars$estimate["shape1"]
 shape2ML <- betaPars$estimate["shape2"]
-
+# Putting it all together
 statSpecial <- stat_function(aes(x = xval, y = ..y..), fun = dbeta, colour="orchid", n = length(z$myvar), args = list(shape1=shape1ML,shape2=shape2ML))
 pSpecial + statSpecial
+```
 
-# Simulating a New Data Set
+#### Simulating a New Data Set
 
+```{r}
 # Creating a Data Frame with Random Gamma Values
 simData <- rgamma(n=length(z$myvar),shape=shapeML,rate=rateML)
 id <- 1:length(z$myvar)
