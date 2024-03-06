@@ -100,7 +100,7 @@ ANOPlot <- ggplot(data=ANOdata) +
 print(ANOPlot)
 ```
 
-# Number 6
+#### Number 6
 
 ```{r}
 # Adjusting the means between the groups
