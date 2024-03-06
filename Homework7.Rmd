@@ -9,9 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### Creating Fake Data Sets to Explore Hypotheses
 ```{r}
-# Creating Fake Data Sets to Explore Hypotheses
-
 # Accessing useful packages
 library(ggplot2)
 library(MASS) 
@@ -19,12 +18,16 @@ library(tidyverse)
 
 # Reading the data table
 z <- read.table(file="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",header=TRUE,sep=",")
-# Converting the data to a log function
+# Converting the data to a log function and data cleaning 0s
 z <-z%>%filter(pathogen_load>0)%>%
   mutate(myvar=log(pathogen_load))
+```
 
-# Assuming a normal distribution, the hypothesis is that the pathogen load differs for the different sites
+#### Number 1
 
+Assuming a normal distribution, the hypothesis is that the pathogen load differs for the different sites.
+
+```{r}
 # Creating a data frame for each of the sites
 df <- data.frame(z$site_code,z$pathogen_load)
 CINDdf <- df[z$site_code=="CIND",]
@@ -32,7 +35,11 @@ BOSTdf <- df[z$site_code=="BOST",]
 MUDGEdf <- df[z$site_code=="MUDGE",]
 FLANdf <- df[z$site_code=="FLAN",]
 COLdf <- df[z$site_code=="COL",]
+```
 
+#### Number 2
+
+```{r}
 # Expected mean for each site
 CINDExpectedMean <- mean(CINDdf$z.pathogen_load)
 BOSTExpectedMean <- mean(BOSTdf$z.pathogen_load)
@@ -46,15 +53,19 @@ BOSTExpectedSD <- sd(BOSTdf$z.pathogen_load)
 MUDGEExpectedSD <- sd(MUDGEdf$z.pathogen_load)
 FLANExpectedSD <- sd(FLANdf$z.pathogen_load)
 COLExpectedSD <- sd(COLdf$z.pathogen_load)
+```
 
-# I will be using the sample sizes specific to each group for my initial analysis
+I will be using the sample sizes specific to each group for my initial analysis.
 
-# A code to analyze the data
+Independent Variable: categorical
 
-# Independent Variable: categorical
-# Dependent Variable: continuous
-# So I chose ANOVA
+Dependent Variable: continuous
 
+### ANOVA Analysis
+
+#### Number 3
+
+```{r}
 # Constructing the random normal distribution data sets
 
 nGroup <- 5 # number of treatment groups
@@ -72,7 +83,11 @@ resVar <- c(rnorm(n=nSize[1],mean=nMean[1],sd=nSD[1]),
 TGroup <- rep(nName,nSize)
 ANOdata <- data.frame(ID,TGroup,resVar)
 str(ANOdata)
+```
 
+#### Number 4 & 5
+
+```{r}
 # Creating the ANOVA Model
 ANOmodel <- aov(resVar~TGroup,data=ANOdata)
 # aov function = analysis of variants
@@ -83,11 +98,15 @@ ANOPlot <- ggplot(data=ANOdata) +
   aes(x=TGroup,y=resVar,fill=TGroup) + # aesthetic mapping
   geom_boxplot()
 print(ANOPlot)
+```
 
+# Number 6
+
+```{r}
 # Adjusting the means between the groups
 
-# Multiplying the mean of the group with the highest mean by a factor of 2.5 results in a significant p-value
-nMean <- c(CINDExpectedMean,BOSTExpectedMean*2.5,MUDGEExpectedMean,FLANExpectedMean,COLExpectedMean)
+# Multiplying the mean of the group with the highest mean by a factor of 3 results in a significant p-value
+nMean <- c(CINDExpectedMean,BOSTExpectedMean*3,MUDGEExpectedMean,FLANExpectedMean,COLExpectedMean)
 nSize <- c(53,98,55,140,102)
 ID <- 1:(sum(nSize)) # ID vector for each row
 resVar <- c(rnorm(n=nSize[1],mean=nMean[1],sd=nSD[1]),
@@ -108,12 +127,16 @@ ANOPlot <- ggplot(data=ANOdata) +
   aes(x=TGroup,y=resVar,fill=TGroup) + # aesthetic mapping
   geom_boxplot()
 print(ANOPlot)
+```
 
-# Increasing the sample size to at least 300 will result in a significant p-value
+#### Number 7
+
+```{r}
+# Increasing the sample size to at least 400 will almost always result in a significant p-value
 # Anything lower was sometimes significant, sometimes not significant
 # Initially tested by manipulating one at a time
 nMean <- c(CINDExpectedMean,BOSTExpectedMean,MUDGEExpectedMean,FLANExpectedMean,COLExpectedMean)
-nSize <- c(300,300,300,300,300)
+nSize <- c(400,400,400,400,400)
 ID <- 1:(sum(nSize)) # ID vector for each row
 resVar <- c(rnorm(n=nSize[1],mean=nMean[1],sd=nSD[1]),
             rnorm(n=nSize[2],mean=nMean[2],sd=nSD[2]),
