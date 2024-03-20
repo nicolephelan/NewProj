@@ -1,0 +1,115 @@
+---
+title: "Homework 8"
+author: "Nicole Phelan"
+date: "2024-03-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Manipulation Using the `dplyr` Package
+
+#### Question 1
+
+```{r}
+# Accessing useful packages
+library(tidyverse)
+
+# Accessing the iris data
+data("iris")
+
+#Examining the structure
+glimpse(iris)
+```
+
+There are 5 variables (columns) for sepal length, sepal width, petal length, petal width, and species. There are 150 observations (rows) included in this data set.
+
+#### Question 2
+
+```{r}
+# Creating a new data frame 
+iris1 <- filter(iris, Species=="virginica" | Species=="versicolor", Sepal.Length>=6 & Sepal.Width>=2.5)
+# Examining the structure
+glimpse(iris1)
+```
+
+There are still 5 variables (columns) in the data set. However, after filtering out all others species than *I. versicolor* and *I. virginica* and creating criteria for sepal size, there are only 63 observations (rows).
+
+#### Question 3
+
+```{r}
+# Getting rid of extra columns
+iris2 <- select(iris1, Species, Sepal.Length, Sepal.Width)
+# Examining the structure
+glimpse(iris2)
+```
+
+There are still 63 observations (rows) like iris1, but now there are only 3 variables (columns).
+
+#### Question 4
+
+```{r}
+# Largest to smallest sepal length
+iris3 <- arrange(iris2, by=desc(Sepal.Length))
+# Showing the first 6 rows
+glimpse(iris3[1:6,])
+```
+
+#### Question 5
+
+```{r}
+# Adding column for sepal area
+iris4 <- transmute(iris3, Species, Sepal.Length, Sepal.Width, Sepal.Area=Sepal.Length*Sepal.Width)
+glimpse(iris4)
+```
+
+There are still 63 observations (rows) like iris2 and iris3, but now there are 4 variables (columns).
+
+#### Question 6
+
+```{r}
+# Summarizing iris4
+iris5 <- summarize(iris4, Average_Sepal_Length=mean(Sepal.Length),
+                   Average_Sepal_Width=mean(Sepal.Width),
+                   Sample_Size=nrow(iris4))
+print(iris5)
+```
+
+#### Question 7
+
+```{r}
+# Summarizing iris4 for each species
+iris_species <- group_by(iris4, Species)
+iris6 <- summarize(iris_species, Average_Sepal_Length=mean(Sepal.Length),
+                   Average_Sepal_Width=mean(Sepal.Width),
+                   Sample_Size=n())
+print(iris6)
+```
+
+#### Question 8
+
+```{r}
+# Reworking everything as a pipe statement
+irisFinal <- iris %>%
+  filter(Species=="virginica" | Species=="versicolor",
+         Sepal.Length>=6 & Sepal.Width>=2.5) %>% # iris1
+  select(Species, Sepal.Length, Sepal.Width) %>% # iris2
+  arrange(by=desc(Sepal.Length)) %>% # iris3
+  mutate(Sepal.Area=Sepal.Length*Sepal.Width) %>% #iris4
+  group_by(Species) %>% # first step of iris6
+  summarize(Average_Sepal_Length=mean(Sepal.Length),
+                   Average_Sepal_Width=mean(Sepal.Width),
+                   Sample_Size=n()) # second step of iris6
+irisFinal
+```
+
+#### Question 9
+
+```{r}
+# Creating a longer data frame
+irisLonger  <- iris %>%
+  pivot_longer(cols=c(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width), names_to="Measure", values_to="Value")
+irisLonger
+```

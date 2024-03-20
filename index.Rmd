@@ -22,3 +22,5 @@ This web page is where you can find all of my homework assignments (aka my portf
 [Homework 06](Homework6.html) ([Sample Data](Homework6Sample.html))
 
 [Homework 07](Homework7.html)
+
+[Homework 08](Homework8.html)
