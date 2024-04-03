@@ -16,6 +16,7 @@ source("Homework9.R")
 
 # Cleaning the data
 a <- Data_Cleaning(file_name="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",variable=pathogen_load) 
+# Creating a list of vectors with the pathogen load for each site
 b <- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
 
 ```

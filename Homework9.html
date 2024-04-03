@@ -371,7 +371,8 @@ display: none;
 ## ✖ dplyr::select() masks MASS::select()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre class="r"><code># Cleaning the data
-a &lt;- Data_Cleaning(file_name=&quot;Burnham_field_data_bombus_seasonal_variation_Dataset.csv&quot;,variable=pathogen_load)  </code></pre>
+a &lt;- Data_Cleaning(file_name=&quot;Burnham_field_data_bombus_seasonal_variation_Dataset.csv&quot;,variable=pathogen_load) 
+b &lt;- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)</code></pre>
 </div>
 
 

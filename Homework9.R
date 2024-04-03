@@ -32,12 +32,7 @@ Data_Frame <- function(a,site,variable){
   S3 <- c(b[site=="MUDGE",]$variable)
   S4 <- c(b[site=="FLAN",]$variable)
   S5 <- c(b[site=="COL",]$variable)
-  names(S1) <- "CIND"
-  names(S2) <- "BOST"
-  names(S3) <- "MUDGE"
-  names(S4) <- "FLAN"
-  names(S5) <- "COL"
-  z <- list(S1=CIND, S2=BOST, S3=MUDGE, S4=FLAN, S5=COL)
+  z <- list(CIND=S1, BOST=S2, MUDGE=S3, FLAN=S4, COL=S5)
   return(z)
 }
 b <- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
@@ -49,15 +44,15 @@ b <- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
 # Output: mean, sd, and n (sample size)
 # ---------------------------------------------------------------
 
-Fake_Params <- function(my_list){
-  stat_frame <- matrix(data=NA,nrow = 5,ncol=3,byrow = TRUE,)
-  for (i in 1:length(my_list)){
-    mean <- mean(my_list[[i]])
-    sd <- sd(my_list[[i]])
-    n <- length(my_list[[i]])
-    stat_frame <- (mean,sd,n)
-  }
-  
-}
-x=Fake_Params(my_list=b)
-
+# Fake_Params <- function(my_list){
+#   stat_frame <- matrix(data=NA,nrow = 5,ncol=3,byrow = TRUE,)
+#   for (i in 1:length(my_list)){
+#     mean <- mean(my_list[[i]])
+#     sd <- sd(my_list[[i]])
+#     n <- length(my_list[[i]])
+#     stat_frame <- (mean,sd,n)
+#   }
+#   
+# }
+# x=Fake_Params(my_list=b)
+# 
