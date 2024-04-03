@@ -21,4 +21,12 @@ b <- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
 
 # Creating a data frame with fake parameters
 c <- Fake_Params(my_list=b)
+
+# Creating the fake data set using the parameters from the real data
+d <- Fake_Data(nMean=c$Mean,nSD=c$SD,nSize=c$n)
+
+# Running the ANOVA on the fake data
+e <- ANOVA_Model(Pathogen_Load = d$pathogen_load,ANOdata = d,TGroup = d$TGroup)
+
+# Plotting the data
 ```

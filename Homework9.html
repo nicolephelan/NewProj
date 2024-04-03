@@ -370,13 +370,26 @@ display: none;
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ✖ dplyr::select() masks MASS::select()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre><code>##              Df    Sum Sq   Mean Sq F value Pr(&gt;F)
+## TGroup        4 1.025e+20 2.564e+19   1.285  0.275
+## Residuals   443 8.835e+21 1.994e+19</code></pre>
 <pre class="r"><code># Cleaning the data
 a &lt;- Data_Cleaning(file_name=&quot;Burnham_field_data_bombus_seasonal_variation_Dataset.csv&quot;,variable=pathogen_load) 
 # Creating a list of vectors with the pathogen load for each site
 b &lt;- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
 
 # Creating a data frame with fake parameters
-c &lt;- Fake_Params(my_list=b)</code></pre>
+c &lt;- Fake_Params(my_list=b)
+
+# Creating the fake data set using the parameters from the real data
+d &lt;- Fake_Data(nMean=c$Mean,nSD=c$SD,nSize=c$n)
+
+# Running the ANOVA on the fake data
+e &lt;- ANOVA_Model(Pathogen_Load = d$pathogen_load,ANOdata = d,TGroup = d$TGroup)</code></pre>
+<pre><code>##              Df    Sum Sq   Mean Sq F value Pr(&gt;F)
+## TGroup        4 7.139e+19 1.785e+19   0.903  0.462
+## Residuals   443 8.757e+21 1.977e+19</code></pre>
+<pre class="r"><code># Plotting the data</code></pre>
 </div>
 
 
