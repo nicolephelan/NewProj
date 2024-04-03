@@ -1,0 +1,37 @@
+---
+title: "Homework10"
+author: "Nicole Phelan"
+date: "2024-04-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## For Loops and Randomization Tests
+
+#### Question 1
+
+```{r}
+##################################################################
+# Function: Count_Zero
+# 
+# Input:
+# Output: 
+# ---------------------------------------------------------------
+random_vector <- c(4,0,4,5,6,7,5,7,0,7,0,6)
+counter <- rep(NA,length(numeric_vector))
+Count_Zero <- function(numeric_vector){
+  counter <- rep(NA,length(numeric_vector))
+  for(i in seq_along(random_vector)){
+    if(numeric_vector[i]==0){
+      counter[i]=1
+    } else {
+      counter[i]=0
+    }
+    return(sum(counter))
+  }
+}
+Count_Zero(numeric_vector=random_vector)
+```
