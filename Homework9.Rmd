@@ -1,0 +1,21 @@
+---
+title: "Homework9"
+author: "Nicole Phelan"
+date: "2024-03-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Organizing Code with Structured Programming
+
+```{r}
+source("Homework9.R")
+
+# Cleaning the data
+a <- Data_Cleaning(file_name="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",variable=pathogen_load) 
+b <- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
+
+```

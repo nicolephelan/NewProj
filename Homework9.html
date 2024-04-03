@@ -11,9 +11,9 @@
 
 <meta name="author" content="Nicole Phelan" />
 
-<meta name="date" content="2024-01-24" />
+<meta name="date" content="2024-03-27" />
 
-<title>index</title>
+<title>Homework9</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,23 +350,29 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">index</h1>
+<h1 class="title toc-ignore">Homework9</h1>
 <h4 class="author">Nicole Phelan</h4>
-<h4 class="date">2024-01-24</h4>
+<h4 class="date">2024-03-27</h4>
 
 </div>
 
 
-<p>This web page is where you can find all of my homework assignments
-(aka my portfolio) for BIOL 6100.</p>
-<p><a href="NewPage.html">Homework 02</a></p>
-<p><a href="Homework3.html">Homework 03</a></p>
-<p><a href="Homework4.html">Homework 04</a></p>
-<p><a href="Homework5.html">Homework 05</a></p>
-<p><a href="Homework6.html">Homework 06</a> (<a href="Homework6Sample.html">Sample Data</a>)</p>
-<p><a href="Homework7.html">Homework 07</a></p>
-<p><a href="Homework8.html">Homework 08</a></p>
-<p><a href="Homework9.html">Homework 09</a></p>
+<div id="organizing-code-with-structured-programming" class="section level2">
+<h2>Organizing Code with Structured Programming</h2>
+<pre class="r"><code>source(&quot;Homework9.R&quot;)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
+## ✔ purrr     1.0.2     ✔ tidyr     1.3.0
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ✖ dplyr::select() masks MASS::select()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code># Cleaning the data
+a &lt;- Data_Cleaning(file_name=&quot;Burnham_field_data_bombus_seasonal_variation_Dataset.csv&quot;,variable=pathogen_load)  </code></pre>
+</div>
 
 
 
