@@ -44,15 +44,16 @@ b <- Data_Frame(a=a,site=a$site_code,variable=a$pathogen_load)
 # Output: mean, sd, and n (sample size)
 # ---------------------------------------------------------------
 
-# Fake_Params <- function(my_list){
-#   stat_frame <- matrix(data=NA,nrow = 5,ncol=3,byrow = TRUE,)
-#   for (i in 1:length(my_list)){
-#     mean <- mean(my_list[[i]])
-#     sd <- sd(my_list[[i]])
-#     n <- length(my_list[[i]])
-#     stat_frame <- (mean,sd,n)
-#   }
-#   
-# }
-# x=Fake_Params(my_list=b)
-# 
+
+Fake_Params <- function(my_list){
+  stats_frame <- rep(NA, 3*length(my_list))
+    Mean <- c(mean(my_list$CIND), mean(my_list$BOST), 
+              mean(my_list$MUDGE),mean(my_list$FLAN),mean(my_list$COL))
+    SD <- c(sd(my_list$CIND), sd(my_list$BOST), 
+            sd(my_list$MUDGE),sd(my_list$FLAN),sd(my_list$COL))
+    n <- c(length(my_list$CIND), length(my_list$BOST), 
+           length(my_list$MUDGE),length(my_list$FLAN),length(my_list$COL))
+    stats_frame <- data.frame(Mean,SD,n)
+}
+c=Fake_Params(my_list=b)
+
