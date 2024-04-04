@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Organizing Code with Structured Programming
 
+#### Number 1: Re-Writing with Functions
+
 ```{r}
 source("Homework9.R")
 
@@ -25,8 +27,29 @@ c <- Fake_Params(my_list=b)
 # Creating the fake data set using the parameters from the real data
 d <- Fake_Data(nMean=c$Mean,nSD=c$SD,nSize=c$n)
 
-# Running the ANOVA on the fake data
+# Running the ANOVA on the fake data and generating the box plot
 e <- ANOVA_Model(Pathogen_Load = d$pathogen_load,ANOdata = d,TGroup = d$TGroup)
+```
 
-# Plotting the data
+#### Number 2: Repeating the Analysis with the sites CIND and MUDGE only
+
+Because the previous ANOVA box plot makes it difficult to see what is going on with these two sites, let's zoom in!
+
+```{r}
+
+# Start with the same data set and clean it the same way as before
+a1 <- Data_Cleaning(file_name="Burnham_field_data_bombus_seasonal_variation_Dataset.csv",variable=pathogen_load) 
+
+# Creating a list of vectors with the pathogen load for only 2 sites this time
+b1 <- Data_Frame1(a=a1,site=a1$site_code,variable=a1$pathogen_load)
+
+# Creating a data frame for 2 sites with fake parameters
+c1 <- Fake_Params1(my_list=b1)
+
+# Creating the fake data set for only 2 sites
+d1 <- Fake_Data1(nMean=c1$Mean,nSD=c1$SD,nSize=c1$n)
+
+# Using the same function as number 1 to run the ANOVA and plot it
+e1 <- ANOVA_Model(Pathogen_Load = d1$pathogen_load,ANOdata = d1,TGroup = d1$TGroup)
+
 ```
