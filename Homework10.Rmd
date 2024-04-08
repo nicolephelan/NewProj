@@ -107,3 +107,58 @@ Matrix_Maker <- function(NRows,NCols){
 
 Matrix_Maker(NRows=4,NCols=5); Matrix_Maker(NRows=3,NCols=6)
 ```
+
+#### Question 4A
+
+```{r}
+##################################################################
+# FUNCTION: Sim_Data
+# packages: none
+# simulate 3 groups of data with different means
+# input: Mean1, Mean2, Mean3, Size (sample size of the groups)
+# output: data frame of simulated data
+# ----------------------------------------------------------------
+
+Sim_Data <- function(Mean1,Mean2,Mean3,Size){
+  Sim <- c(rnorm(n=Size,mean=Mean1),
+           rnorm(n=Size,mean=Mean2),
+           rnorm(n=Size,mean=Mean3))
+  Groups <- c(rep("Group1",Size),rep("Group2",Size),rep("Group3",Size))
+  SimData <- data.frame(Groups,Sim)
+  return(SimData)
+}
+
+a <- Sim_Data(Mean1=50,Mean2=100,Mean3=30,Size=10)
+print(a)
+
+```
+
+#### Question 4B
+
+```{r}
+##################################################################
+# FUNCTION: Sim_Data_R
+# packages: none
+# simulate 3 groups with different means, reshuffle response variables, calculate new means
+# input: Mean1, Mean2, Mean3 (sarting means), Size (sample size of the groups)
+# output: vector with new means
+# ----------------------------------------------------------------
+
+Sim_Data_R <- function(Mean1,Mean2,Mean3,Size){
+  Sim <- c(rnorm(n=Size,mean=Mean1),
+           rnorm(n=Size,mean=Mean2),
+           rnorm(n=Size,mean=Mean3))
+  ReShuffled <- sample(x=Sim) # Reshuffles the Data
+  Groups <- c(rep("Group1",Size),rep("Group2",Size),rep("Group3",Size))
+  SimData <- data.frame(Groups,ReShuffled)
+  G1 <- c(SimData[Groups=="Group1",]$ReShuffled)
+  G2 <- c(SimData[Groups=="Group2",]$ReShuffled)
+  G3 <- c(SimData[Groups=="Group3",]$ReShuffled)
+  NewMeanVec <- c(Group1=mean(G1),Group2=mean(G2),Group3=mean(G3))
+  return(NewMeanVec)
+}
+
+b <- Sim_Data_R (Mean1=50,Mean2=100,Mean3=30,Size=10)
+print(b)
+
+```

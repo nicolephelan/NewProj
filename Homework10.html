@@ -461,6 +461,88 @@ Matrix_Maker(NRows=4,NCols=5); Matrix_Maker(NRows=3,NCols=6)</code></pre>
 ## [2,]    2    4    6    8   10   12
 ## [3,]    3    6    9   12   15   18</code></pre>
 </div>
+<div id="question-4a" class="section level4">
+<h4>Question 4A</h4>
+<pre class="r"><code>##################################################################
+# FUNCTION: Sim_Data
+# packages: none
+# simulate 3 groups of data with different means
+# input: Mean1, Mean2, Mean3, Size (sample size of the groups)
+# output: data frame of simulated data
+# ----------------------------------------------------------------
+
+Sim_Data &lt;- function(Mean1,Mean2,Mean3,Size){
+  Sim &lt;- c(rnorm(n=Size,mean=Mean1),
+           rnorm(n=Size,mean=Mean2),
+           rnorm(n=Size,mean=Mean3))
+  Groups &lt;- c(rep(&quot;Group1&quot;,Size),rep(&quot;Group2&quot;,Size),rep(&quot;Group3&quot;,Size))
+  SimData &lt;- data.frame(Groups,Sim)
+  return(SimData)
+}
+
+a &lt;- Sim_Data(Mean1=50,Mean2=100,Mean3=30,Size=10)
+print(a)</code></pre>
+<pre><code>##    Groups       Sim
+## 1  Group1  50.44792
+## 2  Group1  49.26058
+## 3  Group1  48.76877
+## 4  Group1  49.64274
+## 5  Group1  49.89967
+## 6  Group1  50.71576
+## 7  Group1  49.09507
+## 8  Group1  50.72962
+## 9  Group1  50.23351
+## 10 Group1  49.98436
+## 11 Group2 100.14789
+## 12 Group2 101.30587
+## 13 Group2 100.50789
+## 14 Group2  99.08163
+## 15 Group2 100.74923
+## 16 Group2 100.55324
+## 17 Group2 100.46571
+## 18 Group2  99.14205
+## 19 Group2 100.00899
+## 20 Group2 101.50168
+## 21 Group3  28.60622
+## 22 Group3  29.18658
+## 23 Group3  29.93348
+## 24 Group3  31.03041
+## 25 Group3  29.23727
+## 26 Group3  30.67050
+## 27 Group3  30.42562
+## 28 Group3  29.77271
+## 29 Group3  31.55025
+## 30 Group3  30.01034</code></pre>
+</div>
+<div id="question-4b" class="section level4">
+<h4>Question 4B</h4>
+<pre class="r"><code>##################################################################
+# FUNCTION: Sim_Data_R
+# packages: none
+# simulate 3 groups with different means, reshuffle response variables, calculate new means
+# input: Mean1, Mean2, Mean3 (sarting means), Size (sample size of the groups)
+# output: vector with new means
+# ----------------------------------------------------------------
+
+Sim_Data_R &lt;- function(Mean1,Mean2,Mean3,Size){
+  Sim &lt;- c(rnorm(n=Size,mean=Mean1),
+           rnorm(n=Size,mean=Mean2),
+           rnorm(n=Size,mean=Mean3))
+  ReShuffled &lt;- sample(x=Sim) # Reshuffles the Data
+  Groups &lt;- c(rep(&quot;Group1&quot;,Size),rep(&quot;Group2&quot;,Size),rep(&quot;Group3&quot;,Size))
+  SimData &lt;- data.frame(Groups,ReShuffled)
+  G1 &lt;- c(SimData[Groups==&quot;Group1&quot;,]$ReShuffled)
+  G2 &lt;- c(SimData[Groups==&quot;Group2&quot;,]$ReShuffled)
+  G3 &lt;- c(SimData[Groups==&quot;Group3&quot;,]$ReShuffled)
+  NewMeanVec &lt;- c(Group1=mean(G1),Group2=mean(G2),Group3=mean(G3))
+  return(NewMeanVec)
+}
+
+b &lt;- Sim_Data_R (Mean1=50,Mean2=100,Mean3=30,Size=10)
+print(b)</code></pre>
+<pre><code>##   Group1   Group2   Group3 
+## 56.36444 51.67320 70.67996</code></pre>
+</div>
 </div>
 
 
