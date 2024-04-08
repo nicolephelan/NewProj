@@ -14,24 +14,52 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Question 1
 
 ```{r}
+
 ##################################################################
-# Function: Count_Zero
-# 
-# Input:
-# Output: 
-# ---------------------------------------------------------------
-random_vector <- c(4,0,4,5,6,7,5,7,0,7,0,6)
-counter <- rep(NA,length(numeric_vector))
-Count_Zero <- function(numeric_vector){
-  counter <- rep(NA,length(numeric_vector))
-  for(i in seq_along(random_vector)){
+# FUNCTION: Count_Zero
+# packages: none
+# count the number of 0s in a vector
+# input: numeric_vector
+# output: counter (number of 0s in the input vector)
+# ----------------------------------------------------------------
+
+Count_Zero <- function(numeric_vector){ # can remove this line
+  counter <- 0
+  for (i in seq_along(numeric_vector)){
     if(numeric_vector[i]==0){
-      counter[i]=1
-    } else {
-      counter[i]=0
+      counter = counter + 1
     }
-    return(sum(counter))
   }
-}
+  return(counter) # can remove this line
+} # can remove this line
+
+random_vector <- c(0,4,0,4,5,6,7,5,7,0,7,0,6)
 Count_Zero(numeric_vector=random_vector)
+
 ```
+
+This can be written in less lines of code by getting rid of the Count_Zero function structure (ie. starting with counter <- 0), but I wanted to make this a function I could call later on.
+
+#### Question 2
+
+```{r}
+
+##################################################################
+# FUNCTION: Count_Zero1
+# packages: none
+# count the number of 0s in a vector
+# input: numeric_vector
+# output: counter (number of 0s in the input vector)
+# ----------------------------------------------------------------
+
+Count_Zero1 <- function(numeric_vector){ # can remove this line
+  counter <- 0
+  counter <- length(numeric_vector[numeric_vector==0]) # this is the single line of code you need
+  return(counter) # can remove this line
+} # can remove this line
+
+random_vector <- c(0,4,5,6,7,5,7,0,7,0,6)
+Count_Zero1(numeric_vector=random_vector)
+```
+
+This can be written in less lines of code by getting rid of the Count_Zero1 function structure (ie. starting with counter <- 0), but I wanted to make this a function I could call later on.
