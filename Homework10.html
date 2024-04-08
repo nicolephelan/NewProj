@@ -359,8 +359,8 @@ display: none;
 
 <div id="for-loops-and-randomization-tests" class="section level2">
 <h2>For Loops and Randomization Tests</h2>
-<div id="question-1" class="section level4">
-<h4>Question 1</h4>
+<div id="question-1-as-a-callable-function" class="section level4">
+<h4>Question 1 (As A Callable Function)</h4>
 <pre class="r"><code>##################################################################
 # FUNCTION: Count_Zero
 # packages: none
@@ -369,15 +369,15 @@ display: none;
 # output: counter (number of 0s in the input vector)
 # ----------------------------------------------------------------
 
-Count_Zero &lt;- function(numeric_vector){ # can remove this line
+Count_Zero &lt;- function(numeric_vector){ 
   counter &lt;- 0
   for (i in seq_along(numeric_vector)){
     if(numeric_vector[i]==0){
       counter = counter + 1
     }
   }
-  return(counter) # can remove this line
-} # can remove this line
+  return(counter) 
+} 
 
 random_vector &lt;- c(0,4,0,4,5,6,7,5,7,0,7,0,6)
 Count_Zero(numeric_vector=random_vector)</code></pre>
@@ -386,8 +386,22 @@ Count_Zero(numeric_vector=random_vector)</code></pre>
 Count_Zero function structure (ie. starting with counter &lt;- 0), but I
 wanted to make this a function I could call later on.</p>
 </div>
-<div id="question-2" class="section level4">
-<h4>Question 2</h4>
+<div id="question-1-less-lines-of-code" class="section level4">
+<h4>Question 1 (Less Lines of Code)</h4>
+<pre class="r"><code>numeric_vector &lt;- c(0,4,0,4,5,6,7,5,7,0,7,0,6)
+
+counter &lt;- 0
+for (i in seq_along(numeric_vector)){
+  if(numeric_vector[i]==0){
+    counter = counter + 1
+  }
+}
+
+print(counter)</code></pre>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="question-2-as-a-callable-function" class="section level4">
+<h4>Question 2 (As A Callable Function)</h4>
 <pre class="r"><code>##################################################################
 # FUNCTION: Count_Zero1
 # packages: none
@@ -396,11 +410,11 @@ wanted to make this a function I could call later on.</p>
 # output: counter (number of 0s in the input vector)
 # ----------------------------------------------------------------
 
-Count_Zero1 &lt;- function(numeric_vector){ # can remove this line
+Count_Zero1 &lt;- function(numeric_vector){ 
   counter &lt;- 0
-  counter &lt;- length(numeric_vector[numeric_vector==0]) # this is the single line of code you need
-  return(counter) # can remove this line
-} # can remove this line
+  counter &lt;- length(numeric_vector[numeric_vector==0])
+  return(counter) 
+} 
 
 random_vector &lt;- c(0,4,5,6,7,5,7,0,7,0,6)
 Count_Zero1(numeric_vector=random_vector)</code></pre>
@@ -408,6 +422,44 @@ Count_Zero1(numeric_vector=random_vector)</code></pre>
 <p>This can be written in less lines of code by getting rid of the
 Count_Zero1 function structure (ie. starting with counter &lt;- 0), but
 I wanted to make this a function I could call later on.</p>
+</div>
+<div id="question-2-less-lines-of-code" class="section level4">
+<h4>Question 2 (Less Lines of Code)</h4>
+<pre class="r"><code>numeric_vector &lt;- c(0,4,5,6,7,5,7,0,7,0,6)
+
+counter &lt;- 0
+counter &lt;- length(numeric_vector[numeric_vector==0])
+
+print(counter)</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="question-3" class="section level4">
+<h4>Question 3</h4>
+<pre class="r"><code>##################################################################
+# FUNCTION: Matrix_Maker
+# packages: none
+# make matrix with the given dimensions where each output is row number * column number
+# input: number of rows and number of columns
+# output: matrix 
+# ----------------------------------------------------------------
+
+Matrix_Maker &lt;- function(NRows,NCols){
+  Vec &lt;- rep(NA, NRows*NCols) # Make an vector of NAs the size of the matrix
+  M &lt;- matrix(data = Vec, ncol = NCols, nrow = NRows) # Turn vector into matrix
+  M &lt;- row(M)*col(M) # Add values
+  return(M)
+}
+
+Matrix_Maker(NRows=4,NCols=5); Matrix_Maker(NRows=3,NCols=6)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    2    4    6    8   10
+## [3,]    3    6    9   12   15
+## [4,]    4    8   12   16   20</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    2    3    4    5    6
+## [2,]    2    4    6    8   10   12
+## [3,]    3    6    9   12   15   18</code></pre>
 </div>
 </div>
 

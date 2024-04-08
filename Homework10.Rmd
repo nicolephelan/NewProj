@@ -11,10 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## For Loops and Randomization Tests
 
-#### Question 1
+#### Question 1 (As A Callable Function)
 
 ```{r}
-
 ##################################################################
 # FUNCTION: Count_Zero
 # packages: none
@@ -23,27 +22,40 @@ knitr::opts_chunk$set(echo = TRUE)
 # output: counter (number of 0s in the input vector)
 # ----------------------------------------------------------------
 
-Count_Zero <- function(numeric_vector){ # can remove this line
+Count_Zero <- function(numeric_vector){ 
   counter <- 0
   for (i in seq_along(numeric_vector)){
     if(numeric_vector[i]==0){
       counter = counter + 1
     }
   }
-  return(counter) # can remove this line
-} # can remove this line
+  return(counter) 
+} 
 
 random_vector <- c(0,4,0,4,5,6,7,5,7,0,7,0,6)
 Count_Zero(numeric_vector=random_vector)
-
 ```
 
 This can be written in less lines of code by getting rid of the Count_Zero function structure (ie. starting with counter <- 0), but I wanted to make this a function I could call later on.
 
-#### Question 2
+#### Question 1 (Less Lines of Code)
 
 ```{r}
+numeric_vector <- c(0,4,0,4,5,6,7,5,7,0,7,0,6)
 
+counter <- 0
+for (i in seq_along(numeric_vector)){
+  if(numeric_vector[i]==0){
+    counter = counter + 1
+  }
+}
+
+print(counter)
+```
+
+#### Question 2 (As A Callable Function)
+
+```{r}
 ##################################################################
 # FUNCTION: Count_Zero1
 # packages: none
@@ -52,14 +64,46 @@ This can be written in less lines of code by getting rid of the Count_Zero funct
 # output: counter (number of 0s in the input vector)
 # ----------------------------------------------------------------
 
-Count_Zero1 <- function(numeric_vector){ # can remove this line
+Count_Zero1 <- function(numeric_vector){ 
   counter <- 0
-  counter <- length(numeric_vector[numeric_vector==0]) # this is the single line of code you need
-  return(counter) # can remove this line
-} # can remove this line
+  counter <- length(numeric_vector[numeric_vector==0])
+  return(counter) 
+} 
 
 random_vector <- c(0,4,5,6,7,5,7,0,7,0,6)
 Count_Zero1(numeric_vector=random_vector)
 ```
 
 This can be written in less lines of code by getting rid of the Count_Zero1 function structure (ie. starting with counter <- 0), but I wanted to make this a function I could call later on.
+
+#### Question 2 (Less Lines of Code)
+
+```{r}
+numeric_vector <- c(0,4,5,6,7,5,7,0,7,0,6)
+
+counter <- 0
+counter <- length(numeric_vector[numeric_vector==0])
+
+print(counter)
+```
+
+#### Question 3
+
+```{r}
+##################################################################
+# FUNCTION: Matrix_Maker
+# packages: none
+# make matrix with the given dimensions where each output is row number * column number
+# input: number of rows and number of columns
+# output: matrix 
+# ----------------------------------------------------------------
+
+Matrix_Maker <- function(NRows,NCols){
+  Vec <- rep(NA, NRows*NCols) # Make an vector of NAs the size of the matrix
+  M <- matrix(data = Vec, ncol = NCols, nrow = NRows) # Turn vector into matrix
+  M <- row(M)*col(M) # Add values
+  return(M)
+}
+
+Matrix_Maker(NRows=4,NCols=5); Matrix_Maker(NRows=3,NCols=6)
+```
