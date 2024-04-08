@@ -160,5 +160,40 @@ Sim_Data_R <- function(Mean1,Mean2,Mean3,Size){
 
 b <- Sim_Data_R (Mean1=50,Mean2=100,Mean3=30,Size=10)
 print(b)
+```
 
+#### Question 4C
+
+```{r}
+##################################################################
+# FUNCTION: Sim_Data_R_For
+# packages: none
+# simulate 3 groups with different means, reshuffle response variables, calculate new means, repeat 100 times
+# input: Mean1, Mean2, Mean3 (sarting means), Size (sample size of the groups)
+# output: data frame with new means and replicate number
+# ----------------------------------------------------------------
+
+Sim_Data_R_For <- function(Mean1,Mean2,Mean3,Size){
+  DF <- data.frame()
+  for (i in 1:100){
+    Sim <- c(rnorm(n=Size,mean=Mean1),
+             rnorm(n=Size,mean=Mean2),
+             rnorm(n=Size,mean=Mean3))
+    ReShuffled <- sample(x=Sim) # Reshuffles the Data
+    Groups <- c(rep("Group1",Size),rep("Group2",Size),rep("Group3",Size))
+    SimData <- data.frame(Groups,ReShuffled)
+    G1 <- c(SimData[Groups=="Group1",]$ReShuffled)
+    G2 <- c(SimData[Groups=="Group2",]$ReShuffled)
+    G3 <- c(SimData[Groups=="Group3",]$ReShuffled)
+     NewMeanVec <- c(Replicate=i,Group1=mean(G1),Group2=mean(G2),Group3=mean(G3))
+    # DF <-data.frame("Replicate"=i, "NewMean1"=mean(G1), "NewMean2"=mean(G2), "NewMean3"=mean(G3))
+    DF <-rbind(DF, NewMeanVec)
+    
+  }
+   colnames(DF) <- c("Replicate", "NewMean1", "NewMean2", "NewMean3")
+  return(DF)
+}
+
+c <- Sim_Data_R_For (Mean1=50,Mean2=100,Mean3=30,Size=10)
+print(c)
 ```
