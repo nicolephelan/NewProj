@@ -185,8 +185,7 @@ Sim_Data_R_For <- function(Mean1,Mean2,Mean3,Size){
     G1 <- c(SimData[Groups=="Group1",]$ReShuffled)
     G2 <- c(SimData[Groups=="Group2",]$ReShuffled)
     G3 <- c(SimData[Groups=="Group3",]$ReShuffled)
-     NewMeanVec <- c(Replicate=i,Group1=mean(G1),Group2=mean(G2),Group3=mean(G3))
-    # DF <-data.frame("Replicate"=i, "NewMean1"=mean(G1), "NewMean2"=mean(G2), "NewMean3"=mean(G3))
+    NewMeanVec <- c(Replicate=i,Group1=mean(G1),Group2=mean(G2),Group3=mean(G3))
     DF <-rbind(DF, NewMeanVec)
     
   }
@@ -196,4 +195,18 @@ Sim_Data_R_For <- function(Mean1,Mean2,Mean3,Size){
 
 c <- Sim_Data_R_For (Mean1=50,Mean2=100,Mean3=30,Size=10)
 print(c)
+```
+
+#### Question 4D
+
+```{r}
+
+library(ggplot2)
+
+p1 <- qplot(c$NewMean1, xlab = "New Means for Group 1", ylab = "Count")
+p2 <- qplot(c$NewMean2, xlab = "New Means for Group 2", ylab = "Count")
+p3 <- qplot(c$NewMean3, xlab = "New Means for Group 3", ylab = "Count")
+
+print(p1);print(p2);print(p3)
+
 ```
