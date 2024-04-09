@@ -51,6 +51,12 @@ for (i in seq_along(numeric_vector)){
 }
 
 print(counter)
+
+# As shown in class
+counter <- 0
+for (i in seq_along(numeric_vector)){
+  counter <- counter + as.numeric(numeric_vector[i]==0)
+}
 ```
 
 #### Question 2 (As A Callable Function)
@@ -85,6 +91,9 @@ counter <- 0
 counter <- length(numeric_vector[numeric_vector==0])
 
 print(counter)
+
+# As Shown in class
+sum(numeric_vector==0)
 ```
 
 #### Question 3
