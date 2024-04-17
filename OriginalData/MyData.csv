@@ -1,0 +1,44 @@
+#//////////////////////////////
+#---START OF METADATA---
+#------------------------------
+# TITLE: Brief title for entire data set
+# CREATION TIMESTAMP: 10 April 2024 13:59:00
+# AUTHOR: author/owner of data
+#------------------------------
+# AUTHOR EMAIL:
+# AUTHOR ADDRESS:
+# AUTHOR WEBSITE:
+#------------------------------
+# OWNERSHIP: Information on who owns/controls the data
+
+# COLLABORATORS: One or more lines identifying others who collected/own data
+# FUNDING SOURCES: Grant numbers or funding sources for acknowlegment
+# REPOSITORY: One or more lines for GitHub, Dryad, or permanent web repositories where data set can be accessed
+# CITATIONS: One or more lines for publications that cite or use these data
+
+#------------------------------
+# SAMPLING LOCATIONS: One or more lines about where data were collected; GPS for individual sites should be data columns
+# SAMPLING TIMES: One more lines on when data were collected
+# VARIABLE DESCRIPTION: One line for each column in the data set stating what it is and what the units of measurement are
+# MISSING DATA: One or more lines for each variable describing the source of NA values throughout
+#------------------------------
+# DATA TRACK CHANGES LOG (use this section to record any changes to the data set after it is created)
+# DATE:,CHANGES:	
+# DATE:,CHANGES:	
+# DATE:,CHANGES:	
+# DATE:,CHANGES:	
+#------------------------------
+#---END OF METADATA---
+#//////////////////////////////
+#
+#
+#---START OF DATA---
+#
+ID,VarOne,VarTwo,VarThree,TextNotes
+
+
+
+# Can insert comments throughout text to add notes for individual data rows
+
+
+#---END OF DATA---

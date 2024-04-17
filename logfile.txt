@@ -1,0 +1,12 @@
+logfile: logfile.txt
+#######################
+R version: R version 4.3.2 (2023-10-31)
+platform: x86_64-apple-darwin20 (64-bit)
+running: macOS Ventura 13.6.6
+#----------------------
+random number seed: -619105024
+timestamp: Wed Apr 10 13:58:42 2024
+#----------------------
+libraries loaded:
+dplyr forcats ggmosaic ggplot2 log4r lubridate pracma purrr readr stringr TeachingDemos tibble tidyr tidyverse
+#######################
