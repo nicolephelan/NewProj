@@ -13,23 +13,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(ggplot2)
+library(dplyr)
+```
 
-p = ggplot() +
-  geom_segment(aes(x="Diplazium", xend="Diplazium", y=150, yend=1600),
-               linewidth=10, 
-               color="darkturquoise",
-               alpha=0.75)  +
+In a grant proposal about hybridization between ferns Diplazium plantaginifolium and Diplazium ternatum, I want to include a plot of their overlapping elevation ranges. I want their ranges to be plotted on top of each other in different colors, and I want an intermediate color to display their shared elevation range.
+
+```{r}
+Species <- c("Diplazium plantaginifolium","Diplazium plantaginifolium","Diplazium ternatum","Diplazium ternatum")
+El <- c(150,1600,500,2200) # lower and upper elevation bounds for each species
+lab <- c("Species")
+df <- data.frame(Species,El,lab)
+
+p <- ggplot(data = df) +
+  aes(x=lab,y=El,col=Species) +
+  geom_segment(xend=lab, yend=1600, yend=2200,
+               linewidth=15, 
+               alpha=0.7)  +
   theme_classic(base_size = 20) +
-  ylab("Elevation (m)") + 
-  theme(axis.title.x=element_blank())
+  ylab("Elevation Range (m)") + 
+  theme(axis.title.x=element_blank(),axis.text.x=element_blank())+
+  scale_color_manual(values=c("darkgoldenrod1","darkturquoise"))
 p
+```
 
-p1 =  geom_segment(aes(x="Diplazium", xend="Diplazium", y=500, yend=2200),
-                   linewidth=10, 
-                   color="darkgoldenrod1",
-                   alpha=0.75,
-                   position = "stack",
-               stat = "identity") 
-p + p1 + theme(axis.title.x=element_blank(),axis.text.x=element_blank()) +
-  scale_linetype_manual("Diplazium",values=c("Diplazium p","Diplazium t"))
+```{r}
+sdata <- read.csv(file = "SampleDiplaziumData.csv")
+
 ```
