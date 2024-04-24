@@ -366,6 +366,8 @@ display: none;
 
 # I created a new project in R called BIOL6100_Homework11 and moved the barracudar and raw data folder into it.
 
+setwd(&quot;/Users/nicole/Desktop/BIOL6100_Homework11&quot;)
+
 library(log4r)
 library(TeachingDemos)
 library(tidyverse)
@@ -401,12 +403,9 @@ setwd(&quot;/Users/nicole/Desktop/BIOL6100_Homework11/OriginalData&quot;)
 filelist &lt;- list.files(&quot;/Users/nicole/Desktop/BIOL6100_Homework11/OriginalData&quot;)
 filelist
 
-# paste() or paste0() concatenates strings
-paste0(&quot;here is &quot;,&quot;the filepath &quot;, filelist[1])
-
 # use a for loop for the number of files we&#39;re concerned with and pull out files
 filenames &lt;- c()
-for (i in 1:9) {
+for (i in 1:8) {
   setwd(paste0(&quot;/Users/nicole/Desktop/BIOL6100_Homework11/OriginalData&quot;, &quot;/&quot;, filelist[i]))
   filenames[i] &lt;- list.files(pattern=&quot;countdata&quot;)
 }
@@ -424,9 +423,8 @@ filenames
 # 4. change my wd to the CleanedData folder
 # 5. create a new csv file of the cleaned data
 
-years &lt;- c(2015,2016,2017,2018,2019,&quot;2020A&quot;,&quot;2020B&quot;,2021,2022)
-# the data has two count data files for 2020
-for (i in 1:9){
+years &lt;- c(2015,2016,2017,2018,2019,2020,2021,2022)
+for (i in 1:8){
   setwd(paste0(&quot;/Users/nicole/Desktop/BIOL6100_Homework11/OriginalData&quot;, &quot;/&quot;, filelist[i]))
   a=read.csv(file = filenames[i], na.strings = c(&quot;&quot;,&quot;NA&quot;))
   b=a[complete.cases(a[&quot;scientificName&quot;]), ]
@@ -442,7 +440,7 @@ for (i in 1:9){
 getwd()
 filelist1 &lt;- list.files(&quot;/Users/nicole/Desktop/BIOL6100_Homework11/CleanedData&quot;)
 filelist1
-for (i in 1:9){
+for (i in 1:8){
   a = substring(filelist1[i],13,16)
   cat(&quot;The year for file &quot;, i, &quot; is &quot;, a,&quot;\n&quot;)
 }
@@ -454,9 +452,6 @@ for (i in 1:9){
 # 2. add up all of the values for cluster size
 # 3. print out the abundance for each  year
 
-filelist1 &lt;- file.remove(&quot;CleanedData_2020B.csv&quot;)
-filelist1
-# removing the second sampling period for 2020 because it occurred at a different time
 for (i in 1:8){
   a=read.csv(file = filelist1[i])
   c = substring(filelist1[i],13,16)
@@ -479,20 +474,22 @@ for (i in 1:8){
 }
 
 # Question 4
-Years &lt;- 2015:2022
-SpeciesAbundance &lt;- vector(&quot;numeric&quot;,8L)
+
+Summary_Frame &lt;- data.frame(FileNames=rep(NA,8),Years=rep(NA,8),SpeciesAbundance=rep(NA,8),SpeciesRichness=rep(NA,8))
+
+# Question 5
+
 for (i in 1:8){
-  a=read.csv(file = filelist1[i])
-  b= sum(a$clusterSize)
-  SpeciesAbundance[i] &lt;- b
+  a=read.csv(file = filelist1[i]) # bring in each file
+  g = substring(filelist1[i],13,16) # fetch the year
+  Summary_Frame$Years[i] &lt;- g
+  b= sum(a$clusterSize) # fetch the abundance
+  Summary_Frame$SpeciesAbundance[i] &lt;- b
+  d=length(unique(a$scientificName)) # fetch the richness
+  Summary_Frame$SpeciesRichness[i] &lt;- d
+  Summary_Frame$FileNames[i] &lt;- filelist1[i] # column for file name
 }
-SpeciesRichness &lt;-  vector(&quot;numeric&quot;,8L)
-for (i in 1:8){
-  a=read.csv(file = filelist1[i])
-  d=length(unique(a$scientificName))
-  SpeciesRichness[i] &lt;- d
-}
-Summary_Frame &lt;- data.frame(&quot;FileNames&quot;=filelist1,Years,SpeciesAbundance,SpeciesRichness)</code></pre>
+Summary_Frame</code></pre>
 </div>
 
 
