@@ -1,0 +1,30 @@
+Barcode,Species,Collection,Locality,Voucher,DNASeq,FreePinnaPairs,TaperingPinnaPairs,TaperingLength(cm),LaminaLength(cm),Petiole Length(cm),LeafLength(cm),LeafWidthAlong(cm),LeafWidthPerpendicular(cm),LL_WA,LL_WP,PercentLeafTapered,LeafMargin,LeafDivision,Venation,Aerole,LeafBuds,RhizomeScales,RachisScales
+04060362,Diplazium sp.,Hallberg 1615,Mexico,NY,N,NA,NA,NA,NA,NA,NA,39.6,15.3,NA,NA,NA,Entire,Ternate,Pinnate,Y,N,N,N
+04060364,Diplazium sp.,Hallberg 1615,Mexico,NY,N,NA,NA,NA,22.3,36.5,58.8,33.8,17.6,0.6598,1.2670,NA,Entire,Ternate,Pinnate,Y,Pinna Base,N,N
+04059307,Diplazium cristatum,Mickel 6046A,Mexico,NY,N,7,NA,NA,NA,53.8,NA,27.8,23.8,NA,NA,NA,Crenate,Pinnate Pinnatifid,Pinnate,N,N,NA,At Base
+04059317,Diplazium cristatum,Mickel 6046A,Mexico,NY,N,5,NA,NA,NA,49.8,NA,25.2,14.4,NA,NA,NA,Serrate-Crenate,Pinnate Pinnatifid,Pinnate,N,N,Y,At Base
+04059323,Diplazium cristatum,Mickel 5100,Mexico,NY,N,5,NA,NA,NA,21.5,NA,23.4,19.5,NA,NA,NA,Serrate,Pinnate Pinnatifid,Forked,N,N,Y,N
+04059323,Diplazium cristatum,Mickel 5100,Mexico,NY,N,5,NA,NA,NA,18.2,NA,17.4,15.4,NA,NA,NA,Serrate,Pinnate Pinnatifid,Forked,N,N,Y,At Base
+04059940,Diplazium obscurum,Ingela 95-M039,Mexico,NY,N,8,1,15.1,NA,NA,NA,37.0,30.0,NA,NA,NA,"Entire, Dentate Apex",Pinnate,Forked,N,Apical Pinna,NA,N
+04059941,Diplazium obscurum,Ingela 95-M039,Mexico,NY,N,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Y,NA
+04059943,Diplazium obscurum,Breedlove 29817,Mexico,NY,N,8,2,19.6,96.8,34.8,131.6,47.2,15.8,2.0508,6.1266,0.2025,"Entire, Dentate Apex",Pinnate,Forked,N,N,Y,Along Petiole 
+04059944,Diplazium obscurum,Breedlove 29817,Mexico,NY,N,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+04059964,Diplazium plantaginifolium,Hernandez 1006,Mexico,NY,N,NA,NA,21.6,21.6,13.9,35.5,4.2,4.1,5.1429,5.2683,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,N
+04059964,Diplazium plantaginifolium,Hernandez 1006,Mexico,NY,N,NA,NA,27.9,27.9,18.8,46.7,5.7,5.2,4.8947,5.3654,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,Base Only
+04059964,Diplazium plantaginifolium,Hernandez 1006,Mexico,NY,N,NA,NA,27.2,27.2,30.0,57.2,6.4,5.6,4.2500,4.8571,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,Base Only
+04059971,Diplazium plantaginifolium,Hernandez 1006,Mexico,NY,N,NA,NA,24.0,24.0,NA,NA,5.0,4.6,4.8000,5.2174,1.0000,Entire,Simple,Forked,N,Pinna Base,NA,Base Only
+04059971,Diplazium plantaginifolium,Hernandez 1006,Mexico,NY,N,NA,NA,NA,NA,26.2,NA,5.6,4.9,NA,NA,1.0000,Entire,Simple,Forked,N,N,Y,Base Only
+04059972,Diplazium plantaginifolium,Hernandez 1645,Mexico,NY,N,NA,NA,NA,NA,21.7,NA,7.0,5.5,NA,NA,1.0000,Entire,Simple,Forked,N,N,Y,Base Only
+04059972,Diplazium plantaginifolium,Hernandez 1645,Mexico,NY,N,NA,NA,21.4,21.4,18.7,40.1,6.6,5.2,3.2424,4.1154,1.0000,Entire,Simple,Forked,N,N,Y,Base Only
+04059973,Diplazium plantaginifolium,Hernandez 1626,Mexico,NY,N,NA,NA,24.5,24.5,14.8,39.3,5.2,5.0,4.7115,4.9000,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,Entire Rachis
+04059973,Diplazium plantaginifolium,Hernandez 1626,Mexico,NY,N,NA,NA,24.4,24.4,18.7,43.1,5.2,4.7,4.6923,5.1915,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,Base Only
+04059973,Diplazium plantaginifolium,Hernandez 1626,Mexico,NY,N,NA,NA,20.0,20.0,12.7,32.7,4.1,4.0,4.8780,5.0000,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,Entire Rachis
+04059974,Diplazium plantaginifolium,Hernandez 2553,Mexico,NY,N,NA,NA,26.1,26.1,21.6,47.7,6.9,6.2,3.7826,4.2097,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,N
+04059974,Diplazium plantaginifolium,Hernandez 2553,Mexico,NY,N,NA,NA,24.3,24.3,20.0,44.3,6.9,5.6,3.5217,4.3393,1.0000,"Entire, Serrate Apex",Simple,Forked,N,N,Y,Along Petiole
+03188930,Diplazium urticifolium,Sundue 4009,Mexico,NY,N,8,14,22.0,52.1,36.6,88.7,29.2,18.0,1.7842,2.8944,0.4223,Crenate,Pinnate,Pinnate,Rare,N,Y,N
+04060231,Diplazium urticifolium,Hallberg 1451,Mexico,NY,N,11,12,8.7,44.6,30.0,74.6,21,19.8,2.1238,2.2525,0.1951,Crenate,Pinnate,Pinnate,Rare,N,Y,Base Only
+04060234,Diplazium urticifolium,Mickel 5654,Mexico,NY,N,6,NA,NA,NA,NA,NA,31.8,23.0,NA,NA,NA,Crenate,Pinnate,Pinnate,N,N,N,N
+04060235,Diplazium urticifolium,Mickel 5654,Mexico,NY,N,8,13,16.5,46.4,32.7,79.1,27,24.2,1.7185,1.9174,0.3556,Crenate,Pinnate,Pinnate,Rare,N,N,N
+04060238,Diplazium urticifolium,Hallberg 1559,Mexico,NY,N,5,11,10.3,23.0,20.4,43.4,13.9,12.3,1.6547,1.8699,0.4478,Crenate,Pinnate,Pinnate,N,N,Y,Base Only
+04060239,Diplazium urticifolium,Hallberg 1486,Mexico,NY,N,NA,NA,17.5,52.0,21.1,73.1,24.4,15.8,2.1311,3.2911,0.3365,Serrate-Crenate,Pinnate,Pinnate,N,N,N,N
+02641349,Diplazium urticifolium,Testo 871,Mexico,NY,N,10,NA,NA,NA,20.7,NA,21.4,17.5,NA,NA,NA,Serrate-Crenate,Pinnate Pinatifid,Pinnate,N,N,Y,Along Petiole

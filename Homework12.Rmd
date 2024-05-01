@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(ggplot2)
 library(dplyr)
+library(patchwork)
 ```
 
 In a grant proposal about hybridization between ferns Diplazium plantaginifolium and Diplazium ternatum, I want to include a plot of their overlapping elevation ranges. I want their ranges to be plotted on top of each other in different colors, and I want an intermediate color to display their shared elevation range.
@@ -36,7 +37,109 @@ p <- ggplot(data = df) +
 p
 ```
 
+In a related project, I am assessing morphometric data for an undescribed herbarium specimen (Diplazium sp.) that may be a hybrid. Since hybrids tend to have intermediate morphology of their two parents, I am looking to make some plots that might demonstrate that.
+
 ```{r}
-sdata <- read.csv(file = "SampleDiplaziumData.csv")
+# Reading my data
+sdata <- read.csv(file = "FernData.csv")
+
+# Note: Due to a random update in patchwork, I am no longer able to display plots together by adding them
+
+# Plotting the lamina length
+p1 <- ggplot(data = subset(sdata, !is.na(LaminaLength.cm.))) +
+  aes(x=Species, y=LaminaLength.cm., fill=Species) +
+  geom_boxplot() +
+  ylab("Lamina Length (cm)") +
+  theme_classic(base_size = 15) +
+  scale_fill_manual(values=c("coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+# Plotting the petiole length
+p2 <- ggplot(data = subset(sdata, !is.na(Petiole.Length.cm.))) +
+  aes(x=Species, y=Petiole.Length.cm., fill=Species) +
+  geom_boxplot() +
+  ylab("Petiole Length (cm)") +
+  theme_classic(base_size = 15) +
+  scale_fill_manual(values=c("plum","coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+# Plotting the lamina to petiole ratio
+p3 <- ggplot(data = subset(sdata, !is.na(Petiole.Length.cm.) & !is.na(LaminaLength.cm.))) +
+  aes(x=Species, y=LaminaLength.cm./Petiole.Length.cm., fill=Species) +
+  geom_boxplot() +
+  ylab("Lamina Length: Petiole Length") +
+  theme_classic(base_size = 13) +
+  scale_fill_manual(values=c("coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+p1
+p2
+p3
 
 ```
+
+To measure leaf width I played around with 2 different ways to measure width (one was perpendicular and the other was along the branching veins). Let's see how different those graphs look from each other.
+
+```{r}
+# Measuring width along the leaf veins
+p4 <- ggplot(data = subset(sdata, !is.na(LeafWidthAlong.cm.))) +
+  aes(x=Species, y=LeafWidthAlong.cm., fill=Species) +
+  geom_violin() +
+  ylab("Lamina Width (cm)") +
+  theme_classic(base_size = 15) +
+  scale_fill_manual(values=c("plum","coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+# Measuring width perpendicular to the rachis
+p5 <- ggplot(data = subset(sdata, !is.na(LeafWidthPerpendicular.cm.))) +
+  aes(x=Species, y=LeafWidthPerpendicular.cm., fill=Species) +
+  geom_violin() +
+  ylab("Lamina Width (cm)") +
+  theme_classic(base_size = 15) +
+  scale_fill_manual(values=c("plum","coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+p4
+p5
+```
+
+Measuring leaf width along the leaf veins definitely seems to separate out the species a little more than perpendicular width. Next, let's see how this might affect the length to width ratio.
+
+```{r}
+# Measuring width along the leaf veins
+p6 <- ggplot(data = subset(sdata, !is.na(LL_WA))) +
+  aes(x=Species, y=LL_WA, fill=Species) +
+  geom_violin() +
+  ylab("Lamina Length to Width Ratio") +
+  theme_classic(base_size = 15) +
+  scale_fill_manual(values=c("coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+# Measuring width perpendicular to the rachis
+p7 <- ggplot(data = subset(sdata, !is.na(LL_WP))) +
+  aes(x=Species, y=LL_WP, fill=Species) +
+  geom_violin() +
+  ylab("Lamina Length to Width Ratio") +
+  theme_classic(base_size = 15) +
+  scale_fill_manual(values=c("coral2","goldenrod1","darkturquoise","lightpink")) +
+  geom_point(position=position_jitter(width=0.1, height=0.7),
+                                      color="black", alpha= 0.7, size=2) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+p6
+p7
+```
+
+Different measuring techniques drastically changes the L:W ratio for D. obscurum. However, based on both plots, Diplazium sp. has a much lower L:W ratio than any of the parent candidates I've gotten measurements for so far.
